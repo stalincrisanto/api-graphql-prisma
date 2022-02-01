@@ -1,7 +1,6 @@
 import 'reflect-metadata';
 import { Resolver, Query, Arg, Mutation } from 'type-graphql';
 import { User } from './user';
-import { UserService } from './user.service';
 import { PrismaClient } from "@prisma/client";
 import { UserInput } from './types/user-input';
 
@@ -9,8 +8,6 @@ import { UserInput } from './types/user-input';
 export class UserResolver {
 
     private prisma = new PrismaClient();
-
-    constructor(private userService: UserService) { }
 
     @Query((returns) => [User])
     async getAllUsers() {

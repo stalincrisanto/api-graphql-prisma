@@ -12,41 +12,40 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserResolver = void 0;
+exports.CategoryResolver = void 0;
 require("reflect-metadata");
 const type_graphql_1 = require("type-graphql");
-const user_1 = require("./user");
 const client_1 = require("@prisma/client");
-const user_input_1 = require("./types/user-input");
-let UserResolver = class UserResolver {
+const category_1 = require("./category");
+const category_input_1 = require("./types/category-input");
+let CategoryResolver = class CategoryResolver {
     constructor() {
         this.prisma = new client_1.PrismaClient();
     }
-    async getAllUsers() {
+    async getAllCategories() {
         try {
-            return await this.prisma.user.findMany();
+            return await this.prisma.category.findMany();
         }
         catch (error) {
             throw new Error(error.messsage);
         }
     }
-    async getOneUser(idUser) {
-        const dataUser = await this.prisma.user.findUnique({
+    async getOneCategory(idCategory) {
+        const dataCategory = await this.prisma.category.findUnique({
             where: {
-                idUser: idUser
+                idCategory
             }
         });
-        if (!dataUser) {
-            throw new Error(`El usuario con el id ${idUser} no existe`);
+        if (!dataCategory) {
+            throw new Error(`El usuario con el id ${dataCategory} no existe`);
         }
-        return dataUser;
+        return dataCategory;
     }
-    async createUser(dataUser) {
+    async createCategory(dataCategory) {
         try {
-            const newUser = await this.prisma.user.create({
+            const newCategory = await this.prisma.category.create({
                 data: {
-                    emailUser: dataUser.emailUser,
-                    nameUser: dataUser.nameUser
+                    nameCategory: dataCategory.nameCategory
                 }
             });
             return true;
@@ -55,72 +54,71 @@ let UserResolver = class UserResolver {
             return false;
         }
     }
-    async updateUser(idUser, dataUser) {
-        const updateUser = await this.prisma.user.update({
+    async updateCategory(idCategory, dataCategory) {
+        const updateCategory = await this.prisma.category.update({
             where: {
-                idUser
+                idCategory
             },
             data: {
-                emailUser: dataUser.emailUser,
-                nameUser: dataUser.nameUser
+                nameCategory: dataCategory.nameCategory
             },
         });
-        if (!updateUser) {
+        if (!updateCategory) {
             console.log('Ha ocurrido un error');
             return false;
         }
         return true;
     }
-    async deleteUser(idUser) {
+    async deleteCategory(idCategory) {
         try {
-            const deleteUser = await this.prisma.user.delete({
+            const deleteCategory = await this.prisma.category.delete({
                 where: {
-                    idUser
+                    idCategory
                 },
             });
-            return `Usuario con id ${idUser}, eliminado correctamente`;
+            return `Categoría con id ${idCategory}, eliminado correctamente`;
         }
         catch (error) {
-            throw new Error(`No existe el usuario con id ${idUser}`);
+            throw new Error(`No existe la categoría con id ${idCategory}`);
         }
     }
 };
 __decorate([
-    (0, type_graphql_1.Query)((returns) => [user_1.User]),
+    (0, type_graphql_1.Query)((returns) => [category_1.Category]),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
-], UserResolver.prototype, "getAllUsers", null);
+], CategoryResolver.prototype, "getAllCategories", null);
 __decorate([
-    (0, type_graphql_1.Query)((returns) => user_1.User),
-    __param(0, (0, type_graphql_1.Arg)("idUser")),
+    (0, type_graphql_1.Query)((returns) => category_1.Category),
+    __param(0, (0, type_graphql_1.Arg)("idCategory")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
-], UserResolver.prototype, "getOneUser", null);
+], CategoryResolver.prototype, "getOneCategory", null);
 __decorate([
     (0, type_graphql_1.Mutation)((returns) => Boolean),
-    __param(0, (0, type_graphql_1.Arg)("dataUser")),
+    __param(0, (0, type_graphql_1.Arg)("dataCategory")),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [user_input_1.UserInput]),
+    __metadata("design:paramtypes", [category_input_1.CategoryInput]),
     __metadata("design:returntype", Promise)
-], UserResolver.prototype, "createUser", null);
+], CategoryResolver.prototype, "createCategory", null);
 __decorate([
     (0, type_graphql_1.Mutation)((returns) => Boolean),
-    __param(0, (0, type_graphql_1.Arg)("idUser")),
-    __param(1, (0, type_graphql_1.Arg)("dataUser")),
+    __param(0, (0, type_graphql_1.Arg)("idCategory")),
+    __param(1, (0, type_graphql_1.Arg)("dataCategory")),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, user_input_1.UserInput]),
+    __metadata("design:paramtypes", [Number, category_input_1.CategoryInput]),
     __metadata("design:returntype", Promise)
-], UserResolver.prototype, "updateUser", null);
+], CategoryResolver.prototype, "updateCategory", null);
 __decorate([
     (0, type_graphql_1.Mutation)((returns) => String),
-    __param(0, (0, type_graphql_1.Arg)("idUser")),
+    __param(0, (0, type_graphql_1.Arg)("idCategory")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
-], UserResolver.prototype, "deleteUser", null);
-UserResolver = __decorate([
+], CategoryResolver.prototype, "deleteCategory", null);
+CategoryResolver = __decorate([
     (0, type_graphql_1.Resolver)()
-], UserResolver);
-exports.UserResolver = UserResolver;
+], CategoryResolver);
+exports.CategoryResolver = CategoryResolver;
