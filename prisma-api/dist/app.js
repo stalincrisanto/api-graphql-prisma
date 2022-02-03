@@ -8,8 +8,8 @@ const express_1 = __importDefault(require("express"));
 const type_graphql_1 = require("type-graphql");
 const apollo_server_express_1 = require("apollo-server-express");
 const graphql_playground_middleware_express_1 = __importDefault(require("graphql-playground-middleware-express"));
-const type_graphql_2 = require("@generated/type-graphql");
 const client_1 = require("@prisma/client");
+const type_graphql_2 = require("@generated/type-graphql");
 const startServer = async () => {
     const app = (0, express_1.default)();
     const port = 4000;

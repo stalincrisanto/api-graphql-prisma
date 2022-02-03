@@ -19,6 +19,8 @@ model User {
   emailUser String  @unique
   nameUser  String?
   posts Post[]
+  hobbies String[]
+  otherInfor Json?
 }
 
 model Post {

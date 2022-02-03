@@ -5,8 +5,8 @@ import { buildSchema } from 'type-graphql';
 import { ApolloServer } from 'apollo-server-express';
 import graphiql from "graphql-playground-middleware-express";
 import { CategoryResolver } from './modules/category/category.resolver';
-import { resolvers } from "@generated/type-graphql";
 import { PrismaClient } from '@prisma/client';
+import { resolvers } from "@generated/type-graphql";
 
 const startServer = async () => {
     const app = express();
